@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     use HasFactory;
+    public function file(){
+        return $this->hasMany(File::class);
+    }
+
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
 }

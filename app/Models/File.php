@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+    public function lecture(){
+        return $this->belongsTo(Lecture::class);
+    }
 }

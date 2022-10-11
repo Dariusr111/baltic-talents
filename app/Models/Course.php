@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
+    public function group(){
+        return $this->hasMany(Group::class);
+    }
 }
