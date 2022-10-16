@@ -42,12 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function group(){
-        return $this->hasMany(Group::class);
-    }
 
     public function groups()
     {
-        return $this-belongsToMany(Group::class);
+        return $this-hasMany(Group::class);
     }
 }

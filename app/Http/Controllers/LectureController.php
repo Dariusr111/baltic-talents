@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class LectureController extends Controller
      */
     public function index()
     {
-        //
+        $lectures=Lecture::all();
+        $groups=Group::all();
+        return view('lectures.index',['lectures'=>$lectures, 'groups'=>$groups]);
     }
 
     /**
@@ -24,7 +27,9 @@ class LectureController extends Controller
      */
     public function create()
     {
-        //
+        $lectures=Lecture::all();
+        $groups=Group::all();
+        return view('lectures.create',['lectures'=>$lectures, 'groups'=>$groups]);
     }
 
     /**
@@ -35,7 +40,12 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lecture=new Lecture();
+        $lecture->name=$request->name;
+        $lecture->group_id=$request->group_id;
+        $lecture->date=$request->date;
+        $lecture->save();
+        return redirect()->route('lectures.index');
     }
 
     /**
@@ -57,7 +67,8 @@ class LectureController extends Controller
      */
     public function edit(Lecture $lecture)
     {
-        //
+        $groups = Group::all();
+        return view('lectures.update', ['lecture' => $lecture, 'groups'=>$groups]);
     }
 
     /**
@@ -69,7 +80,12 @@ class LectureController extends Controller
      */
     public function update(Request $request, Lecture $lecture)
     {
-        //
+        $lecture->name = $request->name;
+        $lecture->group_id = $request->group_id;
+        $lecture->date=$request->date;
+        $lecture->save();
+
+        return redirect()->route('lectures.index');
     }
 
     /**
@@ -80,6 +96,16 @@ class LectureController extends Controller
      */
     public function destroy(Lecture $lecture)
     {
-        //
+        $lecture->delete();
+        return redirect()->route('lectures.index');
     }
+
+
+    public function groupLectures ($group_id){
+
+        $lectures=Lecture::where('group_id', $group_id)->get();
+        return view('lectures.group',['lectures'=>$lectures]);
+    }
+
+
 }

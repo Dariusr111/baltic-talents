@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -14,7 +15,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
+        $files=File::all();
+        $lectures=Lecture::all();
+        return view('files.index',['files'=>$files, 'lectures'=>$lectures]);
     }
 
     /**
@@ -24,7 +27,9 @@ class FileController extends Controller
      */
     public function create()
     {
-        //
+        $files=File::all();
+        $lectures=Lecture::all();
+        return view('files.create',['files'=>$files, 'lectures'=>$lectures]);
     }
 
     /**
@@ -35,7 +40,12 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file=new File();
+        $file->lecture_id=$request->lecture_id;
+        $file->file=$request->file;
+        $file->name=$request->name;
+        $file->save();
+        return redirect()->route('files.index');
     }
 
     /**
@@ -57,7 +67,8 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
-        //
+        $lectures = Lecture::all();
+        return view('files.update', ['file' => $file, 'lectures'=>$lectures]);
     }
 
     /**
@@ -69,7 +80,12 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        //
+        $file->lecture_id = $request->lecture_id;
+        $file->file = $request->file;
+        $file->name = $request->name;
+        $file->save();
+
+        return redirect()->route('files.index');
     }
 
     /**
@@ -80,6 +96,17 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+        $file->delete();
+        return redirect()->route('files.index');
     }
+
+    public function lectureFiles ($lecture_id){
+
+        $files=File::where('lecture_id', $lecture_id)->get();
+        $lectures=Lecture::all();
+        return view('files.lecture',['files'=>$files, 'lectures'=>$lectures]);
+    }
+
+
+
 }

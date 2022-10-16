@@ -15,4 +15,8 @@ class Lecture extends Model
     public function group(){
         return $this->belongsTo(Group::class);
     }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }

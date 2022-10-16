@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Group_user;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class exitGroupUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses=Course::all();
-        return view('courses.index',['courses'=>$courses]);
+        //
     }
 
     /**
@@ -25,8 +24,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $courses=Course::all();
-        return view('courses.create',['courses'=>$courses]);
+        //
     }
 
     /**
@@ -37,19 +35,16 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $course=new Course();
-        $course->name=$request->name;
-        $course->save();
-        return redirect()->route('courses.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Group_user  $group_user
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Group_user $group_user)
     {
         //
     }
@@ -57,39 +52,34 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Group_user  $group_user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Group_user $group_user)
     {
-
-        return view('courses.update', ['course' => $course]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Group_user  $group_user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Group_user $group_user)
     {
-        $course->name = $request->name;
-        $course->save();
-
-        return redirect()->route('courses.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Group_user  $group_user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Group_user $group_user)
     {
-        $course->delete();
-        return redirect()->route('courses.index');
+        //
     }
 }
